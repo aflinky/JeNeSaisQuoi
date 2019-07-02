@@ -1,10 +1,12 @@
 {
-  "name": "Solo",
+  "name": "solo",
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
   "scripts": {
-    "start": "nodemon server/server.js",
+    "start": "NODE_ENV=production nodemon server/server.js",
+    "build": "NODE_ENV=production webpack",
+    "dev": "webpack-dev-server --hot & NODE_ENV=development node server/server.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "nodemonConfig": {
@@ -20,17 +22,21 @@
     "cheerio": "^1.0.0-rc.3",
     "express": "^4.17.1",
     "jquery": "^3.4.1",
+    "linguee": "^1.0.1",
     "nodemon": "^1.19.1",
     "prop-types": "^15.7.2",
     "react": "^16.8.6",
     "react-dom": "^16.8.6",
-    "request": "^2.88.0"
+    "request": "^2.88.0",
+    "styled-components": "^4.3.2"
   },
   "devDependencies": {
     "@babel/core": "^7.4.5",
     "@babel/preset-env": "^7.4.5",
     "@babel/preset-react": "^7.0.0",
     "babel-loader": "^8.0.6",
+    "babel-plugin-styled-components": "^1.10.6",
+    "babel-preset-react-hot": "^1.0.5",
     "cross-env": "^5.2.0",
     "css-loader": "^3.0.0",
     "mini-css-extract-plugin": "^0.7.0",
@@ -39,6 +45,7 @@
     "sass-loader": "^7.1.0",
     "style-loader": "^0.23.1",
     "webpack": "^4.35.2",
+    "webpack-cli": "^3.3.5",
     "webpack-dev-server": "^3.7.2"
   }
 }
