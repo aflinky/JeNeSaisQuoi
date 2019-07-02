@@ -5,4 +5,14 @@
 
 body {
     background-color: $lightBlue;
+    display: flex;
+    flex-flow: column wrap;
+    align-content: center;
+    justify-items: center;
+}
+
+#root {
+    position: relative;
+    // height: 200px;
+    width: 85%;
 }

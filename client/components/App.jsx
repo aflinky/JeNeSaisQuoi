@@ -1,25 +1,38 @@
 import React, {useState} from 'react';
 import ReactDOM from 'react-dom';
-import styled from 'styled-components'
+import { hot } from 'react-hot-loader';
+import styled from 'styled-components';
+import Search from './Search.jsx';
+import Results from './Results.jsx';
+import Saved from './Saved.jsx';
 
-const Title = styled.div `
-border: 1px solid black;
-height: 200px;
+const Wrapper = styled.div `
 display: flex;
-justify-content: center;
-align-items: center;
+justify-content: space-evenly;
+height: 650px;
+background-color: teal;
+padding: 10px;
 `
 
-const Wrapper = styled.h1 `
-color: purple;
+const LeftWrapper = styled.div `
+display: flex;
+flex-flow: column wrap;
+justify-content: space-evenly;
+height: 90%;
+background-color: blueviolet;
+padding: 10px;
 `
 
 const App = () => {
     return (
         <Wrapper>
-            <Title>Bienvenue dans l'appli !</Title>
+            <LeftWrapper>
+                <Search/>
+                <Saved/>
+            </LeftWrapper>
+            <Results/>
         </Wrapper>
     )
 }
 
-export default App;
+export default hot(module)(App);
