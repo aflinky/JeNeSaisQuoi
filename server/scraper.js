@@ -9,7 +9,7 @@ const linguee = require('linguee');
 const ling = {
     getMoney: (req, res) => {
         linguee
-            .translate('money', { from: 'eng', to: 'fra' })
+            .translate('be', { from: 'eng', to: 'fra' })
             .then(function (response) {
                 // console.log(response);
                 res.status(200).set('Content-Type', 'application/json').send(response)
