@@ -1,4 +1,4 @@
-import React, {useState, useContext} from 'react';
+import React, {useState, useContext, useEffect} from 'react';
 import ReactDOM from 'react-dom';
 import styled from 'styled-components';
 import MyContext from '../MyContext.js';
@@ -16,17 +16,21 @@ border-radius: 10px;
 `
 
 const Results = () => {
-    
-    const {inputQuery, resultsArray} = useContext(MyContext)
+    const [initialState, setInitialState] = useContext(MyContext);
+    const {inputQuery, displayQuery, resultsArray} = initialState;
+    useEffect(() => {
+        console.log('FROM RESULTS COMPONENT: inital state changed')
+        setInitialState(initialState)
+    }, [initialState])
     let entries = [];
     if (resultsArray.length>0) {
         console.log('heck yes! results!')
-        entries = resultsArray.map(x => <SingleEntry el={x}/>)
+        entries = resultsArray.map(x => <SingleEntry el={x} key={Math.random()}/>)
     }
 
     return (
         <Entries>
-            <h1>{inputQuery}</h1>
+            <h1>InputQuery: {inputQuery}, DisplayQuery: {displayQuery}</h1>
             {
                 resultsArray.length === 0 && 
                 <p>Currently no search!</p>

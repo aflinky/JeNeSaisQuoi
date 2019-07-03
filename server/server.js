@@ -10,9 +10,9 @@ app.use(function (req, res, next) {
     next();
 });
 
-app.get('/cheese', ling.getMoney)
+// app.get('/cheese', ling.getMoney)
 
-// app.get('/*')
+app.get('/:word', ling.getStuff)
     
 
 console.log('process var: ', process.env.NODE_ENV)

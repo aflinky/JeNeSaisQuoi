@@ -29,13 +29,15 @@ border-radius: 10px;
 const App = () => {
     const init = { //establish what intialState should be
         inputQuery: "TESTINGSTRING",
+        displayQuery: "",
         resultsArray: ["a", "b", "c"],
         // const [state, dispatch] = useReducer(reducers, localState),
-        reducers: reducers
+        // reducers: reducers
     }
+    const [initalState, setInitalState] = useState(init)
 
     return (
-        <MyContext.Provider value={init}>
+        <MyContext.Provider value={[initalState, setInitalState]}>
             <Wrapper>
                 <LeftWrapper>
                     <Search/>
