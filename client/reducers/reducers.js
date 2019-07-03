@@ -1,13 +1,12 @@
 import * as types from '../actions/actionTypes';
-
-//import initialState from MyContext
+import initialState from '../MyContext.js'
 
 const reducers = (state=initialState, action) => {
     switch (action.type) {
         case types.SUBMIT: {
             return {
-                inputQuery = "", //clears input
-                results = [] //should be something here
+                inputQuery: "", //clears input
+                results: [] //should be something here
             }
         };
         default:

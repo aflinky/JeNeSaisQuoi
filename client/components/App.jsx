@@ -25,7 +25,7 @@ padding: 10px;
 
 const App = () => {
     const init = { //establish what intialState should be
-        inputQuery: "",
+        inputQuery: "TESTINGSTRING",
         resultsArray: []
     }
     return (

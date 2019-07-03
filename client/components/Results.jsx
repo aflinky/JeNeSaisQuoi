@@ -10,9 +10,10 @@ width: 400px;
 `
 
 const Results = () => {
+    const {inputQuery, resultsArray} = useContext(MyContext)
     return (
         <Entries>
-
+            <h1>{inputQuery}</h1>
         </Entries>
     )
 }
