@@ -1,10 +1,10 @@
 import React, {useState} from 'react';
-import ReactDOM from 'react-dom';
 import { hot } from 'react-hot-loader';
 import styled from 'styled-components';
 import Search from './Search.jsx';
 import Results from './Results.jsx';
 import Saved from './Saved.jsx';
+import MyContext from '../MyContext'
 
 const Wrapper = styled.div `
 display: flex;
@@ -24,14 +24,20 @@ padding: 10px;
 `
 
 const App = () => {
+    const init = { //establish what intialState should be
+        inputQuery: "",
+        resultsArray: []
+    }
     return (
-        <Wrapper>
-            <LeftWrapper>
-                <Search/>
-                <Saved/>
-            </LeftWrapper>
-            <Results/>
-        </Wrapper>
+        <MyContext.Provider value={init}>
+            <Wrapper>
+                <LeftWrapper>
+                    <Search/>
+                    <Saved/>
+                </LeftWrapper>
+                <Results/>
+            </Wrapper>
+        </MyContext.Provider>
     )
 }
 

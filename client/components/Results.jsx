@@ -1,6 +1,7 @@
-import React, {useState} from 'react';
+import React, {useState, useContext} from 'react';
 import ReactDOM from 'react-dom';
-import styled from 'styled-components'
+import styled from 'styled-components';
+import MyContext from '../MyContext.js';
 
 const Entries = styled.div `
 background-color: forestgreen;
@@ -9,7 +10,6 @@ width: 400px;
 `
 
 const Results = () => {
-
     return (
         <Entries>
 

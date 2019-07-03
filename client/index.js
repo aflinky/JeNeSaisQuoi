@@ -1,21 +1,14 @@
-import React from 'react'
+import React, { useState, useContext } from 'react'
 import { render } from 'react-dom';
 import App from './components/App.jsx';
 import './scss/application.scss';
-// import myContext from './myContext.js'
 
-// const init = {
-//     inputQuery: "",
-//     resultsArray: []
-// }
 
-// const [initialState, setInitialState] = useState(init)
-// console.log(initialState)
+    render(
+            <App />,
+        document.getElementById('root')
+    );
 
-render(
-  <App />,
-  document.getElementById('root')
-);
 
 //useContext
 //make myContext.js
