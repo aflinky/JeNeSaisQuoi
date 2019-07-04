@@ -35,7 +35,7 @@ const Results = () => {
     console.log("ONE")
     console.log("TWO", displayCopy)
     const [{ data, loading, error }] = useAxios(
-        'http://localhost:3000/dictionary/' + displayCopy
+        'http://localhost:3000/dictionary/' + displayQuery
     )
     if (error) {console.log("error", error)}
     { console.log("data", data) }
@@ -44,10 +44,14 @@ const Results = () => {
     return (
         <Entries>
             <h1>DisplayQuery: {displayQuery}</h1>
-            {/* <button onClick={refetch}>refetch</button> */}
+            {
+                error && !data &&
+                <p>Waiting for you to search!</p>
+            }
+            <br/>
             <p>{JSON.stringify(data)}</p>
             {
-                resultsArray.length === 0 &&
+                resultsArray.length === 0 && !error &&
                 <p>Currently no search!</p>
             }
             {
