@@ -22,9 +22,9 @@ module.exports = {
     ],
     devServer: {
         publicPath: '/build/', //for dev, proxy kicks back to localhost 3000/build
-        // proxy: {
-        //   '/yandex': 'http://localhost:3000'
-        // },
+        proxy: {
+          '/dictionary': 'http://localhost:3000/dictionary'
+        },
         // hot: true,
     },
     module: {

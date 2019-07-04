@@ -21,7 +21,7 @@ const SingleEntry = (props) => { //takes props (one entry with relevant info)
     }, [])
     return (
         <Entry>
-            <p>{props.el}</p>
+            <p>{JSON.stringify(props.el)}</p>
         </Entry>
     )
 }

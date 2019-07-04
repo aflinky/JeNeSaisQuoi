@@ -1,11 +1,9 @@
 import React, { useState, useContext, useEffect } from 'react';
-import ReactDOM from 'react-dom';
 import styled from 'styled-components';
 import MyContext from '../MyContext.js';
 import SingleEntry from './SingleEntry.jsx';
 import axios from 'axios';
-import useAxios from 'axios-hooks'
-// import reactaxios from 'react-axios';
+import useAxios from 'axios-hooks'; //says you don't need this BUT IT LIES
 
 const Entries = styled.div`
 background-color: lightgreen;
@@ -20,66 +18,53 @@ border-radius: 10px;
 
 const Results = () => {
     const [initialState, setInitialState] = useContext(MyContext);
-    const { inputQuery, displayQuery, resultsArray } = initialState;
+    const { displayQuery, resultsArray } = initialState;
+
     useEffect(() => {
         console.log('FROM RESULTS COMPONENT: inital state changed')
-        setInitialState(initialState)
+        // setInitialState(initialState)
+        
+        // async function fetchData(word) {
+        //     console.log(`fetching ${word} here`)
+        //     const result = await axios('http://localhost:3000/dictionary/' + word);
+        //     // console.log(result.data)
+        //     resolve(result.data)
+        // }
 
-        async function fetchData() {
-            const result = await axios('http://slack-server.elasticbeanstalk.com/calendar/NY/12');
-            console.log(result.data)
-            
+        function fetchData(word) {
+            return new Promise((resolve, reject) => {
+                axios('http://localhost:3000/dictionary/' + word, (err, data) => {
+                    if (err) {
+                        reject("error in axios")
+                    }
+                    else resolve(data)
+                })
+            })
         }
-        fetchData();
 
-        // const translate = async () => {
-        //     const cheese = await axios('http://localhost:3000/cheese');
-        //     console.log(cheese)
-        // }
-        // translate();
+        const promise = fetchData("cat");
+        console.log(promise)
 
-        // const translate = async () => {
-            
-            // fetch('http://localhost:3000/:word', {
-            //     method: 'GET',
-            //     params: {word:"cheese"}
-            // })
+        if (!!displayQuery) {
+            // const info = fetchData(displayQuery)
+            // while (info.status !== "fulfilled") {console.log("waiting")}
+            console.log("info", info)
+        }
 
-            // const url = "http://localhost:3000/"
-            // fetch(url, {word: "cheese"})
+    }, [initialState]) //whenever the display query updates, so should the entries
 
-        // .then((response) => response.json)
-        // .then((jason) => console.log(jason))
-        // }
-        // translate();
-
-        // axios.get('http://localhost:3000/cheese').then((response) => {console.log(response)})
-
-    }, [initialState])
-
-    // const [{ data, loading, error }, refetch] = useAxios(
-    //     'http://localhost:3000/cheese'
-    //   )
-     
-    //   if (loading) console.log("loading")
-    //   if (error) console.log("loading")
-    //   if (data) console.log("cheese", data)
-
-    // const translate = async () => {
-    //     const cheese = await axios('http://localhost:3000/cheese');
-    //     console.log(cheese)
-    // }
-    // translate();
-
-    let entries = [];
+    const entries = [];
     if (resultsArray.length > 0) {
-        console.log('heck yes! results!')
-        entries = resultsArray.map(x => <SingleEntry el={x} key={Math.random()} />)
+        resultsArray.forEach(x => {
+            // let entry = makeEntries(x)
+            entries.push(< SingleEntry el = { x } key = { Math.random() } />)
+        })
     }
+    // console.log(entries)
 
     return (
         <Entries>
-            <h1>InputQuery: {inputQuery}, DisplayQuery: {displayQuery}</h1>
+            <h1>DisplayQuery: {displayQuery}</h1>
             {
                 resultsArray.length === 0 &&
                 <p>Currently no search!</p>

@@ -28,11 +28,8 @@ border-radius: 10px;
 
 const App = () => {
     const init = { //establish what intialState should be
-        inputQuery: "TESTINGSTRING",
         displayQuery: "",
-        resultsArray: ["a", "b", "c"],
-        // const [state, dispatch] = useReducer(reducers, localState),
-        // reducers: reducers
+        resultsArray: [{"word":"here"}],
     }
     const [initalState, setInitalState] = useState(init)
 
