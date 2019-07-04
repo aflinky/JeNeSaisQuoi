@@ -9,7 +9,6 @@ const linguee = require('linguee');
 const ling = {
     getStuff: (req, res) => {
         const {word} = req.params;
-        console.log("word", word);
         linguee
             .translate(word, { from: 'eng', to: 'fra' })
             .then(function (response) {

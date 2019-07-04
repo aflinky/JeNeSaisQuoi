@@ -19,52 +19,33 @@ border-radius: 10px;
 const Results = () => {
     const [initialState, setInitialState] = useContext(MyContext);
     const { displayQuery, resultsArray } = initialState;
-
+    const [displayCopy, setDisplayCopy] = useState(displayQuery)
     useEffect(() => {
         console.log('FROM RESULTS COMPONENT: inital state changed')
-        // setInitialState(initialState)
-        
-        // async function fetchData(word) {
-        //     console.log(`fetching ${word} here`)
-        //     const result = await axios('http://localhost:3000/dictionary/' + word);
-        //     // console.log(result.data)
-        //     resolve(result.data)
-        // }
-
-        function fetchData(word) {
-            return new Promise((resolve, reject) => {
-                axios('http://localhost:3000/dictionary/' + word, (err, data) => {
-                    if (err) {
-                        reject("error in axios")
-                    }
-                    else resolve(data)
-                })
-            })
-        }
-
-        const promise = fetchData("cat");
-        console.log(promise)
-
-        if (!!displayQuery) {
-            // const info = fetchData(displayQuery)
-            // while (info.status !== "fulfilled") {console.log("waiting")}
-            console.log("info", info)
-        }
-
+        // setDisplayCopy(displayQuery)
     }, [initialState]) //whenever the display query updates, so should the entries
 
     const entries = [];
     if (resultsArray.length > 0) {
         resultsArray.forEach(x => {
             // let entry = makeEntries(x)
-            entries.push(< SingleEntry el = { x } key = { Math.random() } />)
+            entries.push(< SingleEntry el={x} key={Math.random()} />)
         })
     }
-    // console.log(entries)
+    console.log("ONE")
+    console.log("TWO", displayCopy)
+    const [{ data, loading, error }] = useAxios(
+        'http://localhost:3000/dictionary/' + displayCopy
+    )
+    if (error) {console.log("error", error)}
+    { console.log("data", data) }
+    console.log("THREE")
 
     return (
         <Entries>
             <h1>DisplayQuery: {displayQuery}</h1>
+            {/* <button onClick={refetch}>refetch</button> */}
+            <p>{JSON.stringify(data)}</p>
             {
                 resultsArray.length === 0 &&
                 <p>Currently no search!</p>
