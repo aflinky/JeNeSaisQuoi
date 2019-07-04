@@ -23,8 +23,9 @@ module.exports = {
     devServer: {
         publicPath: '/build/', //for dev, proxy kicks back to localhost 3000/build
         // proxy: {
-        //   '/'specific route goes to : 'http://localhost:3000/'
-        // }
+        //   '/yandex': 'http://localhost:3000'
+        // },
+        // hot: true,
     },
     module: {
         rules: [

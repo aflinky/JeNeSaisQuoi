@@ -18,16 +18,16 @@ const reducers = (initialState=useContext(MyContext).initialState, action) => {
     switch (action.type) {
         case types.SUBMIT: {
 
-            const newState = Object.assign({
+            const newState = {
                 inputQuery: "EMPTY", //changes input (ideally wipes it clean) OR leaves it?
                 displayQuery: action.payload,
                 resultsArray: ['x'] //makes fetch and spits out array of entry objects or error
-            })
+            }
             console.log('STEP 4a: inside the SUBMIT reducer, INITIALSTATE:', initialState)
             console.log('STEP 4b: inside the SUBMIT reducer, ACTION.TYPE:', action.type)
             console.log('STEP 4c inside the SUBMIT reducer, ACTION.PAYLOAD:', action.payload)
-            console.log('STEP 4.d inside the SUBMIT reducer, newState',newState)
-            // setInitialState(newState)
+            console.log('STEP 4.d inside the SUBMIT reducer, newState', newState)
+            // useContext(MyContext).setInitialState(newState)
             return newState;
         };
         default:

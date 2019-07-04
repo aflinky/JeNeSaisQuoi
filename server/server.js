@@ -3,6 +3,9 @@ const app = express(); //call express shit "app"
 const path = require('path'); //use path for correct directions
 const linguee = require('linguee');
 const ling = require('./scraper'); //already uses body-parser?
+const apiKey = process.env.REACT_APP_YANDEX_API_KEY
+const yandexTranslator = require('yandex-translator')(apiKey);
+
 
 app.use(function (req, res, next) {
     res.header("Access-Control-Allow-Origin", "*");
@@ -12,8 +15,27 @@ app.use(function (req, res, next) {
 
 // app.get('/cheese', ling.getMoney)
 
-app.get('/:word', ling.getStuff)
-    
+// app.get('/:word', ling.getStuff)
+
+app.get('/yandex/:word', (req, res) => {
+    const { word } = req.params;
+    console.log(word)
+    // unsure if need encodeURIComponent for word
+    yandexTranslator.translate({ text: 'Bonjour', to: 'en' }).then(
+        (err, result) => {
+            if (err) {
+                console.log("Yandex err", err)
+                return res.status(500).send('fuck')
+            }
+            console.log("Yandex result: ", result);
+            res.status(200).set('Content-Type', 'application/json').send(result)
+
+        }
+       
+    )
+}
+)
+
 
 console.log('process var: ', process.env.NODE_ENV)
 if (process.env.NODE_ENV === 'production') {

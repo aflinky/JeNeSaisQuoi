@@ -21,8 +21,10 @@ const ling = {
     // },
     getStuff: (req, res) => {
         const {word} = req.params;
+        console.log("word", word);
+        // console.log("body", req.body); //there is no body
         linguee
-            .translate(word, { from: 'eng', to: 'fra' })
+            .translate("word", { from: 'eng', to: 'fra' })
             .then(function (response) {
                 // console.log(response);
                 res.status(200).set('Content-Type', 'application/json').send(response)

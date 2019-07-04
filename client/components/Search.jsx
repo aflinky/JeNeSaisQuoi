@@ -1,5 +1,5 @@
 import React, {useState, useContext, useEffect, useReducer} from 'react';
-import ReactDOM from 'react-dom';
+// import ReactDOM from 'react-dom';
 import styled from 'styled-components';
 import MyContext from '../MyContext.js';
 import reducers from '../reducers/reducers.js';
@@ -28,13 +28,14 @@ const Search = () => {
     // ^ better for using useReducer?
     // console.log("copyContext", copyContext)
     const [initialState, setInitialState] = useContext(MyContext);
+    const [state, dispatch] = useReducer(reducers, initialState) //whatever this initalState is RIGHT now is what is sent...
     useEffect(() => {
         console.log('heres the effect \n', "initialState: ", initialState, "\nlocalInput: ", localInput, "\nstate: ", state)
-        
+        setInitialState(state)
+        // console.log('heres the effect AGAIN \n', "initialState: ", initialState, "\nlocalInput: ", localInput, "\nstate: ", state)        
     }, [state, localInput, initialState]) //listens for stuff in array
     // console.log("INITIAL STATEEEEEEE:", initialState)
-    if (state) {setInitialState(state)}
-    const [state, dispatch] = useReducer(reducers, initialState) //whatever this initalState is RIGHT now is what is sent...
+    // if (state) {setInitialState(state)}
     
     // const [state, dispatch] = useReducer(reducers, {"inputQuery":"here", "displayQuery":"meow", "resultsArray": []}) //maybe need to move reducer to initialState
     // const [state, dispatch] = useReducer(reducers, setInitialState(initialState)) //doesn't actually give state for reducer to use
@@ -72,7 +73,7 @@ const Search = () => {
         })
 
         // dispatch(submitQ(localInput))
-        whatIwant.then(() => {console.log("in promise, state:", state, "whatIWant", whatIwant);setInitialState(state)})
+        whatIwant.then(() => {console.log("in promise, state:", state, "whatIWant", whatIwant); setInitialState(state)})
         // console.log(initialState)
         //STEP 4 in reducers
         console.log("STEP BEFORE 5, state: ", state)

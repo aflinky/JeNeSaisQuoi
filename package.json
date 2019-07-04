@@ -18,6 +18,8 @@
   "author": "Amanda Flink https://github.com/aflinky <avflinkette@gmail.com>",
   "license": "ISC",
   "dependencies": {
+    "axios": "^0.19.0",
+    "axios-hooks": "^1.1.2",
     "body-parser": "^1.19.0",
     "cheerio": "^1.0.0-rc.3",
     "express": "^4.17.1",
@@ -26,9 +28,11 @@
     "nodemon": "^1.19.1",
     "prop-types": "^15.7.2",
     "react": "^16.8.6",
+    "react-axios": "^2.0.3",
     "react-dom": "^16.8.6",
     "request": "^2.88.0",
-    "styled-components": "^4.3.2"
+    "styled-components": "^4.3.2",
+    "yandex-translator": "^1.0.1"
   },
   "devDependencies": {
     "@babel/core": "^7.4.5",
