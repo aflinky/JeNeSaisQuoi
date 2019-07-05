@@ -31,7 +31,7 @@ border: 2px lightskyblue outset;
 `
 
 const SingleEntry = (props) => { //takes props (one entry with relevant info)
-    const [initialState, setInitialState] = useContext(MyContext);
+    const [localState, setLocalState] = useState(0);
 
     props = JSON.parse(props.el)
     // console.log("EXAMPLES", props.examples)
@@ -42,9 +42,9 @@ const SingleEntry = (props) => { //takes props (one entry with relevant info)
         ex.push(<p key={"ex" + Math.random() * 100}>{x.to}</p>)
         ex.push(<br/>)
     }
-    // useEffect(() => {
-    //     // console.log
-    // }, [])
+    useEffect(() => {
+        console.log('here')
+    }, [localState])
 
     const saveWord = e => { //submits localInput as payload to SUBMIT action through dispatcher to update inital State (global state)
         e.preventDefault();
@@ -52,7 +52,7 @@ const SingleEntry = (props) => { //takes props (one entry with relevant info)
         // axios.post({url: '/words', payload: (props)}).then(() => resolve())
         try {
             const response = axios.post('http://localhost:3000/words', props);
-            setInitialState(initialState);
+            setLocalState(localState+1)
             // console.log('👉 Returned data:', response);
         }
         catch (e) {

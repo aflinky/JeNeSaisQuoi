@@ -63,7 +63,7 @@ const Results = () => {
     // if (error) { console.log("error", error) }
     // { console.log("data", data) }
     if (data) {
-        // console.log("data.query: ", data.query)
+        console.log("data.: ", data)
         // console.log("data.words.translations: ", data.words.translations)
         if (data.words) {
             for (let piece of data.words) {
@@ -106,6 +106,10 @@ const Results = () => {
             <br />
             {
                 displayQuery && error && !data && !loading &&
+                <NoMatch>Sorry, nothing matched your search!</NoMatch>
+            }
+            {
+                data && data.words.length===0 && !loading &&
                 <NoMatch>Sorry, nothing matched your search!</NoMatch>
             }
             {
