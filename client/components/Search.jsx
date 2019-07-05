@@ -4,18 +4,25 @@ import MyContext from '../MyContext.js';
 import reducers from '../reducers/reducers.js';
 import {submitQ} from '../actions/actions.js'
 
+const Form = styled.form `
+display: flex;
+`
 const Input = styled.input `
-background: turquoise;
-height: 20px;
-width: 300px;
+font-size: 12px;
+height: 25px;
+width: 275px;
 border-radius: 10px;
+border: 2px lightskyblue outset;
 outline: none;
 padding: 10px;
 `
 const Button = styled.button `
-padding: 12px;
+font-size: 12px;
+padding: 7px;
 border-radius: 10px;
+border: 2px lightskyblue outset;
 outline: none;
+word-wrap: breakword;
 `
 
 
@@ -39,10 +46,10 @@ const Search = () => {
     }
 
     return (
-        <form onSubmit={submitQuery}>
-            <Input type="text" placeholder="Chercher" onChange={changeQuery}></Input>
-            <Button type="submit">Chercher</Button>
-        </form>
+        <Form onSubmit={submitQuery}>
+            <Input type="text" placeholder="Search : chercher" onChange={changeQuery}></Input>
+            <Button type="submit">Translate : Traduire</Button>
+        </Form>
     )
 }
 

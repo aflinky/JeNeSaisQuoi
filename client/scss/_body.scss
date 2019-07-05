@@ -11,6 +11,17 @@ body {
     justify-items: center;
 }
 
+h1 {
+    position: relative;
+    top: 10px;
+    z-index: 10;
+    text-shadow: none;
+    font-size: 45px;
+    font-style: italic;
+    text-shadow: 2px 1px 1.5px rgb(0, 0, 46);
+    // color: rgb(0, 0, 46);
+}
+
 #root {
     position: relative;
     // height: 200px;

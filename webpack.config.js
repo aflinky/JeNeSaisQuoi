@@ -23,9 +23,9 @@ module.exports = {
     devServer: {
         publicPath: '/build/', //for dev, proxy kicks back to localhost 3000/build
         proxy: {
-          '/dictionary': 'http://localhost:3000/dictionary'
+            '/dictionary': 'http://localhost:3000/dictionary'
         },
-        // hot: true,
+        hot: true,
     },
     module: {
         rules: [

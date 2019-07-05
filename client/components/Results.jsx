@@ -1,58 +1,75 @@
-import React, { useState, useContext, useEffect } from 'react';
+import React, { useContext, useEffect } from 'react';
 import styled from 'styled-components';
 import MyContext from '../MyContext.js';
 import SingleEntry from './SingleEntry.jsx';
-import axios from 'axios';
-import useAxios from 'axios-hooks'; //says you don't need this BUT IT LIES
+import axios from 'axios'; //says you don't need this BUT IT LIES
+import useAxios from 'axios-hooks';
 
+const Query = styled.h1`
+margin-top: 20px;
+`
 const Entries = styled.div`
-background-color: lightgreen;
-height: 90%;
+background-color: lightcyan;
+height: 95%;
 width: 100%;
 display: flex;
 flex-flow: column wrap;
 justify-content: flex-start;
 align-items: center;
 border-radius: 10px;
+border: 2px lightskyblue outset;
+margin: 10px;
+padding: 0px 20px;
+box-shadow: 6px 6px 15px black;
+`
+const Waiting = styled.p`
+background-color: white;
+border-radius: 10px;
+border: 2px lightskyblue outset;
+margin-top: 36%;
+padding: 10px;
+`
+const NoMatch = styled.p`
+background-color: white;
+border-radius: 10px;
+border: 2px lightskyblue outset;
+margin-top: 28%;
+padding: 10px;
 `
 
 const Results = () => {
     const [initialState, setInitialState] = useContext(MyContext);
     const { displayQuery, resultsArray } = initialState;
-    const [displayCopy, setDisplayCopy] = useState(displayQuery)
     useEffect(() => {
         console.log('FROM RESULTS COMPONENT: inital state changed')
-        // setDisplayCopy(displayQuery)
     }, [initialState]) //whenever the display query updates, so should the entries
+
+    const [{ data, loading, error }] = useAxios(
+        // 'http://localhost:3000/dictionary/' + displayQuery
+    )
+    if (error) { console.log("error", error) }
+    { console.log("data", data) }
 
     const entries = [];
     if (resultsArray.length > 0) {
         resultsArray.forEach(x => {
             // let entry = makeEntries(x)
-            entries.push(< SingleEntry el={x} key={Math.random()} />)
+            entries.push(< SingleEntry el={data} key={Math.random()} />)
         })
     }
-    console.log("ONE")
-    console.log("TWO", displayCopy)
-    const [{ data, loading, error }] = useAxios(
-        'http://localhost:3000/dictionary/' + displayQuery
-    )
-    if (error) {console.log("error", error)}
-    { console.log("data", data) }
-    console.log("THREE")
 
     return (
         <Entries>
-            <h1>DisplayQuery: {displayQuery}</h1>
+            <Query>{displayQuery}</Query>
             {
-                error && !data &&
-                <p>Waiting for you to search!</p>
+                error && !data && !displayQuery &&
+                <Waiting>Waiting for you to search!</Waiting>
             }
-            <br/>
+            <br />
             <p>{JSON.stringify(data)}</p>
             {
-                resultsArray.length === 0 && !error &&
-                <p>Currently no search!</p>
+                displayQuery && error &&
+                <NoMatch>Sorry, nothing matched your search!</NoMatch>
             }
             {
                 resultsArray.length > 0 &&

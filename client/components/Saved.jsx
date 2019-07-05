@@ -7,6 +7,7 @@ background-color: white;
 height: 80%;
 width: 400px;
 border-radius: 10px;
+border: 2px lightskyblue outset;
 `
 
 const Results = () => {

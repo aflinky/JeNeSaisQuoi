@@ -4,9 +4,9 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "start": "NODE_ENV=production nodemon server/server.js",
+    "start": "NODE_ENV=production nodemon server/server.js --open",
     "build": "NODE_ENV=production webpack",
-    "dev": "webpack-dev-server --hot & NODE_ENV=development node server/server.js",
+    "dev": "webpack-dev-server --hot --open & NODE_ENV=development node server/server.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "nodemonConfig": {
