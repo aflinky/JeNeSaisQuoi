@@ -1,21 +1,83 @@
-import React, {useState} from 'react';
+import React, { useState, useEffect, useContext } from 'react';
+import MyContext from '../MyContext.js';
 import ReactDOM from 'react-dom';
 import styled from 'styled-components'
+import axios from 'axios';
+import useAxios from 'axios-hooks';
 
-const Saved = styled.div `
+const SavedData = styled.div`
 background-color: white;
 height: 80%;
 width: 400px;
 border-radius: 10px;
 border: 2px lightskyblue outset;
+display: flex;
+flex-direction: column;
+justify-content: flex-start;
+align-items: center;
+overflow: scroll;
+`
+const Entry = styled.div`
+background-color: lightblue;
+height: fit-content;
+width: 80%;
+margin: 4px;
+padding: 10px;
+border-radius: 10px;
+display: flex;
+flex-direction: column;
+justify-content: center;
+border: 2px lightskyblue outset;
+`
+const Key = styled.p`
+font-weight: 750;
+`
+const Span = styled.span`
+font-weight: 400;
 `
 
-const Results = () => {
+const Saved = () => {
+    const [initialState, setInitialState] = useContext(MyContext)
+    const [{ data, loading, error }] = useAxios(
+        'http://localhost:3000/words/'
+    )
+    const savedEntries = [];
+    useEffect(() => {
+        // if (data) {console.log(data)}
+    }, [initialState])
+    if (data && data !== "Sorry, nothing in this database") {
+        console.log(data)
+        for (let entry of data) {
+            let examples = []
+            for (let x of entry.examples) {
+                console.log(x)
+                examples.push(<p key={"examples" + Math.random() * 100}>{x.from}</p>)
+                examples.push(<p key={"examples" + Math.random() * 100}>{x.to}</p>)
+            }
+            // console.log(entry)
+            savedEntries.push(<Entry>
+                <Key>ENG: <Span>{entry.term}</Span></Key>
+                <pre><Key>   type: <Span>{entry.type}</Span></Key></pre>
+                <Key>FR: <Span>{entry.term2}</Span></Key>
+                <pre><Key>   type: <Span>{entry.type2}</Span></Key></pre>
+                <br/>
+                {
+                    examples.length>0 &&
+                    examples
+                }
+            </Entry>)
+        }
+    }
+
+
 
     return (
-        <Saved>
-
-        </Saved>
+        <SavedData>
+            {
+                savedEntries.length > 0 &&
+                savedEntries
+            }
+        </SavedData>
     )
 }
 

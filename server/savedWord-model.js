@@ -7,7 +7,7 @@ const savedWordSchema = new Schema({
   type: String,
   term2: String,
   type2: String,
-  examples: Array
+  examples: {type: Array, default: []}
 });
 
 

@@ -3,14 +3,14 @@ const app = express(); //call express shit "app"
 const path = require('path'); //use path for correct directions
 const linguee = require('linguee');
 const ling = require('./scraper'); //already uses body-parser?
-// const mongo = require('./mongo.js')
-// const bodyParser = require('body-parser')
-// let connectedToDB = false;
+const mongo = require('./mongo.js')
+const bodyParser = require('body-parser')
+const mongoose = require('mongoose')
+let connectedToDB = false;
 
-// mongoose.connect(JSON.parse(fs.readFileSync(__dirname + '/config.json','utf8')).uri, () => {
-//     connectedToDB = true;
-//     console.log('connected to mongo');  
-//   });
+mongoose.connection.once('open', () => {
+    console.log('Connected with MongoDB savedWords');
+  });
 
 
 app.use(function (req, res, next) {
@@ -22,8 +22,8 @@ app.use(function (req, res, next) {
 app.get('/dictionary/:word', ling.getStuff);
 
 
-// app.post('/words', bodyParser.json(), mongo.post)
-// app.get('/words', mongo.show)
+app.post('/words', bodyParser.json(), mongo.post)
+app.get('/words', mongo.show)
 
 
 console.log('process var: ', process.env.NODE_ENV)

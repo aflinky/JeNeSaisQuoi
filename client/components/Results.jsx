@@ -54,8 +54,9 @@ const Results = () => {
         'http://localhost:3000/dictionary/' + displayQuery
     )
     let entries = [];
+
     useEffect(() => {
-        console.log('FROM RESULTS COMPONENT: inital state changed')
+        // console.log('FROM RESULTS COMPONENT: inital state changed')
         entries = [];
     }, [initialState, error, data]) //whenever the display query updates, so should the entries
 
@@ -66,13 +67,13 @@ const Results = () => {
         // console.log("data.words.translations: ", data.words.translations)
         if (data.words) {
             for (let piece of data.words) {
-                console.log(piece.term.toLowerCase())
-                console.log(displayQuery.toLowerCase())
+                // console.log(piece.term.toLowerCase())
+                // console.log(displayQuery.toLowerCase())
                 // console.log("this", piece.term.toLowerCase().match(displayQuery.toLowerCase()).length)
                 // console.log("HERERERERERE",(piece.term.toLowerCase().match(displayQuery.toLowerCase())))
                 if (!(piece.term.toLowerCase().match(displayQuery.toLowerCase())) && !(piece.term.toLowerCase().match(displayQuery.toLowerCase()))) continue
-                console.log("piece", piece)
-                console.log("piece.translations", piece.translations)
+                // console.log("piece", piece)
+                // console.log("piece.translations", piece.translations)
                 for (let entry of piece.translations) {
                     let tempObj = {};
                     tempObj.term = piece.term;
@@ -87,11 +88,11 @@ const Results = () => {
     }
 
 
-    const singals = [];
+    const signals = [];
     if (entries.length > 0) {
         entries.forEach(x => {
-            singals.push(<br />)
-            singals.push(< SingleEntry el={JSON.stringify(x)} key={Math.random()*100} />)
+            signals.push(<br />)
+            signals.push(< SingleEntry el={JSON.stringify(x)} key={Math.random()*100} />)
         })
     }
 
@@ -113,7 +114,7 @@ const Results = () => {
             }
             {
                 entries.length > 0 &&
-                singals
+                signals
             }
         </Entries>
     )

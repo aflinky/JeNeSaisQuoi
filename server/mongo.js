@@ -13,11 +13,12 @@ const mongo = {
                 return res.status(200).send("Sorry, nothing in this database")
             }
             else {
-                res.status(200).send(results);
+                res.status(200).set('Content-Type', 'application/json').send(JSON.stringify(results));
             }
         })
     },
     post: (req, res) => {
+        // console.log("in post", req.body)
         SavedWord.create(req.body, (err) => {
             if (err) {
                 console.log("Error in creating message:", err)
