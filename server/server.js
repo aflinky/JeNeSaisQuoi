@@ -3,8 +3,14 @@ const app = express(); //call express shit "app"
 const path = require('path'); //use path for correct directions
 const linguee = require('linguee');
 const ling = require('./scraper'); //already uses body-parser?
-// const apiKey = process.env.REACT_APP_YANDEX_API_KEY
-// const yandexTranslator = require('yandex-translator')(apiKey);
+// const mongo = require('./mongo.js')
+// const bodyParser = require('body-parser')
+// let connectedToDB = false;
+
+// mongoose.connect(JSON.parse(fs.readFileSync(__dirname + '/config.json','utf8')).uri, () => {
+//     connectedToDB = true;
+//     console.log('connected to mongo');  
+//   });
 
 
 app.use(function (req, res, next) {
@@ -13,7 +19,11 @@ app.use(function (req, res, next) {
     next();
 });
 
-app.get('/dictionary/:word', ling.getStuff)
+app.get('/dictionary/:word', ling.getStuff);
+
+
+// app.post('/words', bodyParser.json(), mongo.post)
+// app.get('/words', mongo.show)
 
 
 console.log('process var: ', process.env.NODE_ENV)
