@@ -21,10 +21,19 @@ const mongo = {
         // console.log("in post", req.body)
         SavedWord.create(req.body, (err) => {
             if (err) {
-                console.log("Error in creating message:", err)
-                res.status(400).send("Error sending message")
+                console.log("Error in creating word:", err)
+                res.status(400).send("Error sending word")
             }
             else { res.status(200).send("good job") }
+        })
+    },
+    delete: (req, res) => {
+        SavedWord.findOneAndDelete(req.body, (err) => {
+            if (err) {
+                console.log("Error in deleting word:", err)
+                res.status(400).send("Error deleting word")
+            }
+            else { res.status(200).send("good job, you deleted it") }
         })
     }
 }

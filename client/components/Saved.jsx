@@ -35,6 +35,11 @@ font-weight: 750;
 const Span = styled.span`
 font-weight: 400;
 `
+const Button = styled.button`
+border-radius: 4px;
+width: 75px;
+border: 2px lightskyblue outset;
+`
 
 const Saved = () => {
     const [initialState, setInitialState] = useContext(MyContext)
@@ -45,6 +50,22 @@ const Saved = () => {
     useEffect(() => {
         // if (data) {console.log(data)}
     }, [initialState])
+
+    const deleteWord = e => { //submits localInput as payload to SUBMIT action through dispatcher to update inital State (global state)
+        e.preventDefault();
+        console.log("clicked!")
+        if (data) console.log(e.target.id)
+        const deletePair = JSON.parse(e.target.id)
+        console.log(deletePair.term)
+        try {
+            const response = axios.delete('http://localhost:3000/words', {"term": deletePair.term});
+            console.log('👉 Returned data:', response);
+        }
+        catch (e) {
+            console.log(`😱 Axios request failed: ${e}`);
+        }
+    }
+
     if (data && data !== "Sorry, nothing in this database") {
         console.log(data)
         for (let entry of data) {
@@ -53,6 +74,7 @@ const Saved = () => {
                 console.log(x)
                 examples.push(<p key={"examples" + Math.random() * 100}>{x.from}</p>)
                 examples.push(<p key={"examples" + Math.random() * 100}>{x.to}</p>)
+                examples.push(<br/>)
             }
             // console.log(entry)
             savedEntries.push(<Entry>
@@ -65,11 +87,12 @@ const Saved = () => {
                     examples.length>0 &&
                     examples
                 }
+                <Button onClick={deleteWord} id={JSON.stringify(entry)}>DELETE ME</Button>
             </Entry>)
         }
     }
 
-
+    
 
     return (
         <SavedData>

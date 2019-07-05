@@ -15,6 +15,7 @@ mongoose.connection.once('open', () => {
 
 app.use(function (req, res, next) {
     res.header("Access-Control-Allow-Origin", "*");
+    res.header('Access-Control-Allow-Methods', 'GET,POST,DELETE');
     res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
     next();
 });
@@ -22,8 +23,9 @@ app.use(function (req, res, next) {
 app.get('/dictionary/:word', ling.getStuff);
 
 
-app.post('/words', bodyParser.json(), mongo.post)
-app.get('/words', mongo.show)
+app.post('/words', bodyParser.json(), mongo.post);
+app.get('/words', mongo.show);
+app.delete('/words', bodyParser.json(), mongo.delete);
 
 
 console.log('process var: ', process.env.NODE_ENV)

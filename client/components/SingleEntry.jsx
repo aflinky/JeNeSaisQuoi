@@ -31,6 +31,8 @@ border: 2px lightskyblue outset;
 `
 
 const SingleEntry = (props) => { //takes props (one entry with relevant info)
+    const [initialState, setInitialState] = useContext(MyContext);
+
     props = JSON.parse(props.el)
     // console.log("EXAMPLES", props.examples)
     const ex = [];
@@ -38,6 +40,7 @@ const SingleEntry = (props) => { //takes props (one entry with relevant info)
         // console.log("X", x)
         ex.push(<p key={"ex" + Math.random() * 100}>{x.from}</p>)
         ex.push(<p key={"ex" + Math.random() * 100}>{x.to}</p>)
+        ex.push(<br/>)
     }
     // useEffect(() => {
     //     // console.log
@@ -49,6 +52,7 @@ const SingleEntry = (props) => { //takes props (one entry with relevant info)
         // axios.post({url: '/words', payload: (props)}).then(() => resolve())
         try {
             const response = axios.post('http://localhost:3000/words', props);
+            setInitialState(initialState);
             // console.log('👉 Returned data:', response);
         }
         catch (e) {
@@ -62,11 +66,11 @@ const SingleEntry = (props) => { //takes props (one entry with relevant info)
             <pre><Key>   type: <Span>{props.type}</Span></Key></pre>
             <Key>FR: <Span>{props.term2}</Span></Key>
             <pre><Key>   type: <Span>{props.type2}</Span></Key></pre>
+            <br/>
             {
                 ex.length > 0 &&
                 ex
             }
-            <br/>
             <Button onClick={saveWord}>SAVE ME</Button>
         </Entry>
     )
