@@ -1,6 +1,5 @@
-const mongoose = require('mongoose');
-const Schema = mongoose.Schema;
-mongoose.connect('mongodb://localhost/solo');
+const { Schema, model } = require('mongoose');
+
 
 const savedWordSchema = new Schema({
   term: String,
@@ -10,7 +9,6 @@ const savedWordSchema = new Schema({
   examples: {type: Array, default: []}
 });
 
-
-const SavedWord = mongoose.model('SavedWord', savedWordSchema);
+const SavedWord = model('SavedWord', savedWordSchema);
 
 module.exports = SavedWord;

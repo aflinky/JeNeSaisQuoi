@@ -7,7 +7,7 @@ import useAxios from 'axios-hooks';
 // import { resolve } from 'path';
 
 const Entry = styled.div`
-background-color: lightblue;
+background-color: lightcyan;
 height: fit-content;
 width: 80%;
 margin: 4px;
@@ -16,7 +16,7 @@ border-radius: 10px;
 display: flex;
 flex-direction: column;
 justify-content: center;
-border: 2px lightskyblue outset;
+border: 2px lightblue outset;
 `
 const Key = styled.p`
 font-weight: 750;
@@ -27,53 +27,53 @@ font-weight: 400;
 const Button = styled.button`
 border-radius: 4px;
 width: 75px;
-border: 2px lightskyblue outset;
+border: 2px skyblue outset;
+outline: none;
+cursor: pointer;
 `
 
 const SingleEntry = (props) => { //takes props (one entry with relevant info)
-    const [localState, setLocalState] = useState(0);
+  const [initialState, setInitialState] = useContext(MyContext)
+  const { reloadCount } = initialState;
 
-    props = JSON.parse(props.el)
-    // console.log("EXAMPLES", props.examples)
-    const ex = [];
-    for (let x of props.examples) {
-        // console.log("X", x)
-        ex.push(<p key={"ex" + Math.random() * 100}>{x.from}</p>)
-        ex.push(<p key={"ex" + Math.random() * 100}>{x.to}</p>)
-        ex.push(<br/>)
+  props = JSON.parse(props.el)
+  // console.log("EXAMPLES", props.examples)
+  const ex = [];
+  for (let x of props.examples) {
+    // console.log("X", x)
+    ex.push(<p key={"ex" + Math.random() * 100}>{x.from}</p>)
+    ex.push(<p key={"ex" + Math.random() * 100}>{x.to}</p>)
+    ex.push(<br />)
+  }
+
+  const saveWord = e => { //submits localInput as payload to SUBMIT action through dispatcher to update inital State (global state)
+    // e.preventDefault();
+    // console.log(e.target.info + "clicked!")
+    // axios.post({url: '/words', payload: (props)}).then(() => resolve())
+    try {
+      const response = axios.post('http://localhost:3000/words', props);
+      setInitialState({...initialState, reloadCount: reloadCount+1})
+      // console.log('👉 Returned data:', response);
     }
-    useEffect(() => {
-        console.log('here')
-    }, [localState])
-
-    const saveWord = e => { //submits localInput as payload to SUBMIT action through dispatcher to update inital State (global state)
-        e.preventDefault();
-        console.log(e.target.info + "clicked!")
-        // axios.post({url: '/words', payload: (props)}).then(() => resolve())
-        try {
-            const response = axios.post('http://localhost:3000/words', props);
-            setLocalState(localState+1)
-            // console.log('👉 Returned data:', response);
-        }
-        catch (e) {
-            console.log(`😱 Axios request failed: ${e}`);
-        }
+    catch (e) {
+      console.log(`😱 Axios request failed: ${e}`);
     }
+  }
 
-    return (
-        <Entry>
-            <Key>ENG: <Span>{props.term}</Span></Key>
-            <pre><Key>   type: <Span>{props.type}</Span></Key></pre>
-            <Key>FR: <Span>{props.term2}</Span></Key>
-            <pre><Key>   type: <Span>{props.type2}</Span></Key></pre>
-            <br/>
-            {
-                ex.length > 0 &&
-                ex
-            }
-            <Button onClick={saveWord}>SAVE ME</Button>
-        </Entry>
-    )
+  return (
+    <Entry>
+      <Key>ENG: <Span>{props.term}</Span></Key>
+      <pre><Key>   type: <Span>{props.type}</Span></Key></pre>
+      <Key>FR: <Span>{props.term2}</Span></Key>
+      <pre><Key>   type: <Span>{props.type2}</Span></Key></pre>
+      <br />
+      {
+        ex.length > 0 &&
+        ex
+      }
+      <Button onClick={saveWord}>SAVE ME</Button>
+    </Entry>
+  )
 }
 
 export default SingleEntry;

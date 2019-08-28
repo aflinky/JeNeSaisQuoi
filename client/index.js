@@ -4,7 +4,7 @@ import App from './components/App.jsx';
 import './scss/application.scss';
 
 
-    render(
-            <App />,
-        document.getElementById('root')
-    );
+render(
+  <App />,
+  document.getElementById('root')
+);

@@ -12,7 +12,7 @@ font-size: 12px;
 height: 25px;
 width: 275px;
 border-radius: 10px;
-border: 2px lightskyblue outset;
+border: 2px rgb(91, 129, 255) outset;
 outline: none;
 padding: 10px;
 `
@@ -20,7 +20,7 @@ const Button = styled.button `
 font-size: 12px;
 padding: 7px;
 border-radius: 10px;
-border: 2px lightskyblue outset;
+border: 2px rgb(91, 129, 255) outset;
 outline: none;
 word-wrap: breakword;
 `
@@ -32,9 +32,9 @@ const Search = () => {
     const [state, dispatch] = useReducer(reducers, initialState) //whatever this initalState is RIGHT now is what is sent...
 
     useEffect(() => {
-        console.log('heres the effect \n', "initialState: ", initialState, "\nlocalInput: ", localInput, "\nstate: ", state)
+        // console.log('heres the effect \n', "initialState: ", initialState, "\nlocalInput: ", localInput, "\nstate: ", state)
         setInitialState(state)
-    }, [state]) //listens for changes in state (result of reducer) then UPDATES initialState
+    }, [state]) //listens for changes in state (result of lightcyanucer) then UPDATES initialState
 
     const changeQuery = (e) => { //changes localInput state while typing
         e.preventDefault();
@@ -57,11 +57,11 @@ export default Search;
 
 // USEFUL BREAKDOWN FOR UNDERSTANDING REACT USEREDUCER HOOK
 // https://reactjs.org/docs/hooks-custom.html
-// function useReducer(reducer, initialState) {
+// function useReducer(Reducer, initialState) {
 //     const [state, setState] = useState(initialState);
   
 //     function dispatch(action) {
-//       const nextState = reducer(state, action);
+//       const nextState = Reducer(state, action);
 //       setState(nextState);
 //     }
   
