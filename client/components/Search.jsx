@@ -23,6 +23,7 @@ border-radius: 10px;
 border: 2px rgb(91, 129, 255) outset;
 outline: none;
 word-wrap: breakword;
+cursor: pointer;
 `
 
 

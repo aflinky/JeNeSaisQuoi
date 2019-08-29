@@ -7,7 +7,7 @@
     "start": "NODE_ENV=production nodemon server/server.js --open",
     "build": "NODE_ENV=production webpack",
     "dev": "webpack-dev-server --hot --inline & NODE_ENV=development node server/server.js",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "jest --verbose --detectOpenHandles"
   },
   "nodemonConfig": {
     "ignore": [
@@ -17,6 +17,10 @@
   },
   "author": "Amanda Flink https://github.com/aflinky <avflinkette@gmail.com>",
   "license": "ISC",
+  "jest": {
+    "globalSetup": "./jest-setup.js",
+    "globalTeardown": "./jest-teardown.js"
+  },
   "dependencies": {
     "axios": "^0.19.0",
     "axios-hooks": "^1.1.2",
@@ -24,6 +28,7 @@
     "cheerio": "^1.0.0-rc.3",
     "dotenv": "^8.1.0",
     "express": "^4.17.1",
+    "jest": "^24.9.0",
     "jquery": "^3.4.1",
     "linguee": "^1.0.1",
     "mongoose": "^5.6.3",
@@ -33,7 +38,8 @@
     "react-axios": "^2.0.3",
     "react-dom": "^16.8.6",
     "request": "^2.88.0",
-    "styled-components": "^4.3.2"
+    "styled-components": "^4.3.2",
+    "supertest": "^4.0.2"
   },
   "devDependencies": {
     "@babel/core": "^7.4.5",

@@ -22,10 +22,6 @@ module.exports = {
     ],
     devServer: {
         publicPath: '/build/', //for dev, proxy kicks back to localhost 3000/build
-        // proxy: {
-        //     '/dictionary': 'http://localhost:3000/dictionary'
-        //     // '/words': 'http://localhost:3000/words'
-        // },
         proxy: [{
             context: ['/dictionary', '/words'],
             target: 'http://localhost:3000',

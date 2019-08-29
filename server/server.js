@@ -29,7 +29,7 @@ app.delete('/words', bodyParser.json(), mongo.delete);
 
 
 // console.log('process var: ', process.env.NODE_ENV)
-if (process.env.NODE_ENV === 'production') {
+if (process.env.NODE_ENV === 'production' || process.env.NODE_ENV === 'test') {
     // statically serve everything in the build folder on the route '/build'
     app.use('/build', express.static(path.join(__dirname, '../build')));
     // serve index.html on the root route '/'
@@ -38,4 +38,4 @@ if (process.env.NODE_ENV === 'production') {
     });
 }
 // const port = process.env.PORT 
-app.listen(3000, () => { console.log(`listening on port 3000`) }); //listens on port 3000 -> http://localhost:3000/
+module.exports = app.listen(3000, () => { console.log(`listening on port 3000`) }); //listens on port 3000 -> http://localhost:3000/

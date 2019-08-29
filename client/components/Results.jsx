@@ -57,6 +57,7 @@ const Results = () => {
 
   useEffect(() => {
     entries = [];
+    console.log("reset entries")
   }, [initialState, error, data]) //whenever the display query updates, so should the entries
 
   // if (error) { console.log("error", error) }

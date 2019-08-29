@@ -6,7 +6,7 @@ import axios from 'axios';
 import useAxios from 'axios-hooks';
 
 const SavedData = styled.div`
-background-color: whitesmoke;
+background-color: white;
 height: 80%;
 width: 400px;
 border-radius: 10px;
